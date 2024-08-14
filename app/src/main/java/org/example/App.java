@@ -19,19 +19,32 @@ public class App {
             router.setHandshakeIvl(0);
             router.setSendTimeOut(5000);
             router.setReceiveTimeOut(5000);
-            router.bind(endpoint);
 
+            router.bind(endpoint);
             // Register socket to poller of size 1
             try (var poller = context.createPoller(1)) {
                 poller.register(router, ZMQ.Poller.POLLIN);
-                // Find out if we officially support interrupting threads
+
                 while (!Thread.currentThread().isInterrupted()) {
                     poller.poll(500);
+
+                    // Check to see if we have waiting messages
                     if (poller.pollin(0)) {
+                        // Receive identity
+                        var identity = router.recv(0);
+                        System.out.println("Received identity: " + new String(identity));
+
                         // Receive message
+                        var message = router.recvStr(0);
+                        System.out.println("Received message: " + message);
+
+                        // Send reply
+                        router.send(identity, ZMQ.SNDMORE);
+                        var reply = "Reply from server";
+                        router.send(reply, 0);
                     }
                 }
-                System.out.println("Main thread interrupted. Closing.");
+                System.out.println("Main thread interrupted. Closing poller.");
             }
         } catch (Exception e) {
             System.err.println("Context or Socket unexpectedly closed..");
