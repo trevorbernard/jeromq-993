@@ -14,14 +14,15 @@
         with pkgs; {
           devShells.default = mkShell {
             buildInputs = [
-#              openjdk17_headless
+              openjdk17_headless
+              gradle
               iproute2
               libsodium
               zeromq
               cppzmq
               unixtools.ifconfig
             ];
-#            JAVA_HOME = "${openjdk17_headless}/lib/openjdk";
+            JAVA_HOME = "${openjdk17_headless}/lib/openjdk";
           };
         }
     );
