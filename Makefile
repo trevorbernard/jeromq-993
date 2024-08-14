@@ -2,13 +2,13 @@ CXX = g++
 CXXFLAGS = -std=c++11 -Wall
 LDFLAGS = -lzmq
 
-all: server client
+all: router_server dealer_client
 
-server: server.cpp
-	$(CXX) $(CXXFLAGS) -o server server.cpp $(LDFLAGS)
+server: router_server.cpp
+	$(CXX) $(CXXFLAGS) -o router_server router_server.cpp $(LDFLAGS)
 
-client: client.cpp
-	$(CXX) $(CXXFLAGS) -o client client.cpp $(LDFLAGS)
+client: dealer_client.cpp
+	$(CXX) $(CXXFLAGS) -o dealer_client dealer_client.cpp $(LDFLAGS)
 
 clean:
-	rm -f server client
+	rm -f router_server dealer_client
