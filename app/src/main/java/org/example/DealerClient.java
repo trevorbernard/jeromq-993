@@ -9,7 +9,7 @@ public class DealerClient {
     static ZContext context = new ZContext();
 
     public static void main(String[] args) throws Exception {
-        var threads = new Thread[2];
+        var threads = new Thread[3];
         var endpoint = "tcp://10.10.0.1:5555";
 
         for (int i = 0; i < 2; i++) {
@@ -28,9 +28,9 @@ public class DealerClient {
                     dealer.setReceiveTimeOut(5000);
 
                     dealer.connect(endpoint);
-
+                    int msgCount = 0;
                     while (!Thread.currentThread().isInterrupted()) {
-                        dealer.send("Hello from client " + idx, 0);
+                        dealer.send("Hello from client[" + idx + "]: " + msgCount++, 0);
                         var reply = dealer.recvStr(0);
                         System.out.println("Received reply: " + reply);
 
@@ -48,7 +48,7 @@ public class DealerClient {
 
         System.out.println("Start interrupting the worker threads");
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
             System.out.println("Interrupting Thread " + i);
             threads[i].interrupt();
             try {
@@ -56,10 +56,10 @@ public class DealerClient {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //Thread.sleep(20000);
+            Thread.sleep(20000);
         }
 
-        threads[1].join();
+        threads[2].join();
         System.out.println("All threads have been interrupted.");
     }
 }
