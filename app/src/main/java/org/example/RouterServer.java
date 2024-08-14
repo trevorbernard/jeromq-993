@@ -7,7 +7,7 @@ import static org.zeromq.SocketType.ROUTER;
 
 public class RouterServer {
     public static void main(String[] args) throws Exception {
-        var endpoint = "tcp://10.10.0.1:555";
+        var endpoint = "tcp://10.10.0.1:5555";
         try (var context = new ZContext();
              var router = context.createSocket(ROUTER)) {
             // Initialize router before bind
