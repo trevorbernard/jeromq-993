@@ -6,7 +6,7 @@ int main() {
     zmq::context_t context(1);
     zmq::socket_t dealer(context, zmq::socket_type::dealer);
 
-    dealer.connect("tcp://localhost:5555");
+    dealer.connect("tcp://10.10.0.1:5555");
 
     std::string message = "Hello from client";
     zmq::message_t request(message.data(), message.size());

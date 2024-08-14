@@ -6,7 +6,7 @@ int main() {
     zmq::context_t context(1);
     zmq::socket_t router(context, zmq::socket_type::router);
 
-    router.bind("tcp://*:5555");
+    router.bind("tcp://10.10.0.1:5555");
 
     while (true) {
         zmq::message_t identity;

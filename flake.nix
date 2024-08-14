@@ -19,6 +19,7 @@
               libsodium
               zeromq
               cppzmq
+              unixtools.ifconfig
             ];
 #            JAVA_HOME = "${openjdk17_headless}/lib/openjdk";
           };
