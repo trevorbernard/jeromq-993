@@ -17,5 +17,5 @@ java {
 }
 
 application {
-    mainClass = 'org.example.RouterServer'
+    mainClass = 'org.example.DealerClient'
 }
