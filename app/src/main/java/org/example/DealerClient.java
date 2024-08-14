@@ -56,6 +56,7 @@ public class DealerClient {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            Thread.sleep(20000);
         }
 
         System.out.println("All threads have been interrupted.");
