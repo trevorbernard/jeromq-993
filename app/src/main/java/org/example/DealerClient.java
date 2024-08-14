@@ -12,7 +12,7 @@ public class DealerClient {
         var threads = new Thread[3];
         var endpoint = "tcp://10.10.0.1:5555";
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             final int idx = i;
             threads[i] = new Thread(() -> {
                 System.out.println("Spawning dealer client " + idx);
@@ -48,7 +48,7 @@ public class DealerClient {
 
         System.out.println("Start interrupting the worker threads");
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println("Interrupting Thread " + i);
             threads[i].interrupt();
             try {
@@ -56,10 +56,10 @@ public class DealerClient {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Thread.sleep(20000);
+            Thread.sleep(5000);
         }
 
-        threads[2].join();
+        threads[4].join();
         System.out.println("All threads have been interrupted.");
     }
 }
