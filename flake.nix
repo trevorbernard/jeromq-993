@@ -18,6 +18,7 @@
               iproute2
               libsodium
               zeromq
+              cppzmq
             ];
 #            JAVA_HOME = "${openjdk17_headless}/lib/openjdk";
           };
