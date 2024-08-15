@@ -36,11 +36,14 @@ public class DealerClient {
                         System.out.println("Received reply: " + reply);
 
                         Thread.sleep(2000);
+                        if (idx < 4)
+                            break;
                     }
                 } catch (Exception ex) {
                     System.err.println("Context or Socket unexpectedly closed...");
                     ex.printStackTrace();
                 }
+                System.out.println("socket " + idx + " closed");
             });
             threads[i].start();
         }
@@ -49,18 +52,18 @@ public class DealerClient {
 
         System.out.println("Start interrupting the worker threads");
 
-        for (int i = 0; i < threadCount-1; i++) {
-            System.out.println("Interrupting Thread " + i);
-            threads[i].interrupt();
-            try {
-                threads[i].join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Thread.sleep(5000);
-        }
+//        for (int i = 0; i < threadCount - 1; i++) {
+//            System.out.println("Interrupting Thread " + i);
+//            threads[i].interrupt();
+//            try {
+//                threads[i].join();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            Thread.sleep(5000);
+//        }
 
-        threads[threadCount-1].join();
+        threads[threadCount - 1].join();
         System.out.println("All threads have been interrupted.");
     }
 }
