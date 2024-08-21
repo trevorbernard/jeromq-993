@@ -33,7 +33,7 @@ public class DealerMonitor {
             dealer.monitor(pairEndpoint, zmq.ZMQ.ZMQ_EVENT_ALL);
 
             dealer.connect(endpoint);
-
+            System.out.println("Starting the Dealear Monitor");
             while(Thread.currentThread().isInterrupted()) {
                 poller.poll();
                 // Dealer socket
@@ -54,12 +54,6 @@ public class DealerMonitor {
                     }
                 }
             }
-
-
-            dealer.send("Hello from client", 0);
-            var reply = dealer.recvStr(0);
-            System.out.println("Received reply: " + reply);
-
         } catch (Exception e) {
             System.err.println("Context or Socket unexpectedly closed..");
             e.printStackTrace();
