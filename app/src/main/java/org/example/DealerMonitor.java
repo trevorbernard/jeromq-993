@@ -33,15 +33,16 @@ public class DealerMonitor {
             dealer.monitor(pairEndpoint, zmq.ZMQ.ZMQ_EVENT_ALL);
 
             dealer.connect(endpoint);
-            System.out.println("Starting the Dealear Monitor");
+            System.out.println("Starting the Dealer Monitor");
+            dealer.send("Hello from client", 0);
             while(!Thread.currentThread().isInterrupted()) {
                 poller.poll();
                 // Dealer socket
                 if(poller.pollin(0)) {
-                    dealer.send("Hello from client", 0);
                     var reply = dealer.recvStr(0);
                     System.out.println("Received reply: " + reply);
                     Thread.sleep(2000);
+                    dealer.send("Hello from client", 0);
                 }
                 // Montior socket
                 else if (poller.pollin(1)) {
