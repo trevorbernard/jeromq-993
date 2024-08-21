@@ -17,5 +17,5 @@ java {
 }
 
 application {
-    mainClass = 'org.example.DealerClient'
+    mainClass = 'org.example.DealerMonitor'
 }
