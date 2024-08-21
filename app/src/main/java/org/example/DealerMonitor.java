@@ -34,7 +34,7 @@ public class DealerMonitor {
 
             dealer.connect(endpoint);
             System.out.println("Starting the Dealear Monitor");
-            while(Thread.currentThread().isInterrupted()) {
+            while(!Thread.currentThread().isInterrupted()) {
                 poller.poll();
                 // Dealer socket
                 if(poller.pollin(0)) {
