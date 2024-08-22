@@ -5,6 +5,8 @@ import org.zeromq.ZMQ;
 
 import static org.zeromq.SocketType.DEALER;
 import static org.zeromq.SocketType.PAIR;
+import static zmq.ZMQ.ZMQ_EVENT_CLOSED;
+import static zmq.ZMQ.ZMQ_EVENT_DISCONNECTED;
 
 public class DealerMonitor {
     public static void main(String[] args) throws Exception {
@@ -28,7 +30,6 @@ public class DealerMonitor {
 //            dealer.setHeartbeatTtl(3000);
 //            dealer.setReconnectIVL(-1);
 
-
             monitor.connect(pairEndpoint);
             dealer.monitor(pairEndpoint, zmq.ZMQ.ZMQ_EVENT_ALL);
 
@@ -47,11 +48,12 @@ public class DealerMonitor {
                 // Montior socket
                 else if (poller.pollin(1)) {
                     var event = zmq.ZMQ.Event.read(monitor.base());
-                    if(event.event == zmq.ZMQ.ZMQ_EVENT_DISCONNECTED) {
-                        System.out.println("DISCONNECTED EVENT FIRED");
-                    }
-                    else {
-                        System.out.println("Event:" + event.event);
+                    switch (event.event) {
+                        case ZMQ_EVENT_DISCONNECTED, ZMQ_EVENT_CLOSED -> {
+                            System.out.println("DISCONNECTED or CLOSED EVENT FIRED");
+                        }
+                        default ->  System.out.println("Event:" + event.event);
+
                     }
                 }
             }
