@@ -1,5 +1,8 @@
 classpath := `gradle -q printClasspath`
 
+default:
+    @just --list --justfile {{justfile()}}
+
 build:
     gradle build
 
