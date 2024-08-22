@@ -7,3 +7,4 @@ router_server
 # Ignore Gradle build output directory
 build
 .idea/*
+.cache/*
