@@ -52,8 +52,9 @@ public class DealerMonitor {
                 else if (poller.pollin(1)) {
                     var event = zmq.ZMQ.Event.read(monitor.base());
                     switch (event.event) {
-                        case ZMQ_EVENT_CONNECTED -> {
-                            dealer.send("Hello from client: " + ++msgCount, 0);
+                        case ZMQ_EVENT_HANDSHAKE_SUCCEEDED -> {
+                            System.out.println("HANDSHAKE SUCCEEDED");
+                            dealer.send("Hello from client: " + ++msgCount  , 0);
                         }
                         case ZMQ_EVENT_DISCONNECTED, ZMQ_EVENT_CLOSED -> {
                             System.out.println("DISCONNECTED or CLOSED EVENT FIRED");
