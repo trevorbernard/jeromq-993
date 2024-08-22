@@ -8,3 +8,4 @@ router_server
 build
 .idea/*
 .cache/*
+compile_commands.json
