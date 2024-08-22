@@ -1,6 +1,7 @@
 package org.example;
 
 import org.zeromq.ZContext;
+import org.zeromq.ZEvent;
 import org.zeromq.ZMQ;
 
 import static org.zeromq.SocketType.DEALER;
@@ -39,6 +40,7 @@ public class DealerMonitor {
             dealer.connect(endpoint);
             System.out.println("Starting the Dealer Monitor");
             var msgCount = 0;
+            //ZEvent
             while(!Thread.currentThread().isInterrupted()) {
                 poller.poll();
                 // Dealer socket
@@ -46,14 +48,14 @@ public class DealerMonitor {
                     var reply = dealer.recvStr(0);
                     System.out.println("Received reply: " + reply);
                     Thread.sleep(2000);
-                    dealer.send("Hello from client", 0);
+                    dealer.send("Hello from client: " + ++msgCount, 0);
                 }
                 // Montior socket
                 else if (poller.pollin(1)) {
                     var event = zmq.ZMQ.Event.read(monitor.base());
                     switch (event.event) {
-                        case ZMQ_EVENT_HANDSHAKE_SUCCEEDED -> {
-                            System.out.println("HANDSHAKE SUCCEEDED");
+                        case ZMQ_EVENT_HANDSHAKE_PROTOCOL -> {
+                            System.out.println("HANDSHAKE PROTOCOL");
                             dealer.send("Hello from client: " + ++msgCount  , 0);
                         }
                         case ZMQ_EVENT_DISCONNECTED, ZMQ_EVENT_CLOSED -> {
