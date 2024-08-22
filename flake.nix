@@ -24,6 +24,7 @@
               tcpdump
               clang
               just
+              bear
             ];
             JAVA_HOME = "${openjdk17_headless}/lib/openjdk";
           };
