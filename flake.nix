@@ -22,7 +22,7 @@
               cppzmq
               unixtools.ifconfig
               tcpdump
-              clangd
+              clang
               just
             ];
             JAVA_HOME = "${openjdk17_headless}/lib/openjdk";
