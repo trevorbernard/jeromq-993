@@ -25,7 +25,7 @@ tasks.register('launchDealer', JavaExec) {
     group = "Application"
     description = "Launches the DealerMonitor."
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'com.example.DealerMonitor'
+    mainClass = 'org.example.DealerMonitor'
     args = []
 }
 
@@ -33,6 +33,6 @@ tasks.register('launchRouter', JavaExec) {
     group = "Application"
     description = "Launches the Router."
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'com.example.RouterServer'
+    mainClass = 'org.example.RouterServer'
     args = []
 }
