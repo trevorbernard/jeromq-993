@@ -14,3 +14,12 @@ launch-router: build
 
 launch-dealer: build
     java -cp {{classpath}} org.example.DealerMonitor
+
+create-device:
+    ./ops/create-device.sh
+
+delete-device:
+    ./ops/delete-device.sh
+
+down-device:
+    ./ops/down-device.sh
