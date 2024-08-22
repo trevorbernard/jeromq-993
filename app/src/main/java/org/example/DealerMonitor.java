@@ -19,12 +19,16 @@ public class DealerMonitor {
             poller.register(dealer, ZMQ.Poller.POLLIN);
             poller.register(monitor, ZMQ.Poller.POLLIN);
             // Initialize dealer before connect
+            dealer.setTCPKeepAlive(1);
+            dealer.setTCPKeepAliveCount(1);
+            dealer.setTCPKeepAliveIdle(8);
+            dealer.setTCPKeepAliveInterval(5);
             dealer.setLinger(0);
+            dealer.setHandshakeIvl(0);
+            dealer.setReconnectIVL(30000);
+            dealer.setSendTimeOut(5000);
+            dealer.setReceiveTimeOut(5000);
 
-//            dealer.setHandshakeIvl(0);
-//            dealer.setReconnectIVL(30000);
-//            dealer.setSendTimeOut(5000);
-//            dealer.setReceiveTimeOut(5000);
 //            dealer.setHeartbeatIvl(1000);
 //            dealer.setHeartbeatTimeout(2000);
 //            dealer.setHeartbeatTtl(3000);
@@ -53,7 +57,6 @@ public class DealerMonitor {
                             System.out.println("DISCONNECTED or CLOSED EVENT FIRED");
                         }
                         default ->  System.out.println("Event:" + event.event);
-
                     }
                 }
             }
