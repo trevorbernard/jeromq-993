@@ -21,5 +21,5 @@ create-device:
 delete-device:
     ./ops/delete-device.sh
 
-down-device:
-    ./ops/down-device.sh
+stop-device:
+    ./ops/stop-device.sh
