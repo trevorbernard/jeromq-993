@@ -19,3 +19,20 @@ java {
 application {
     mainClass = 'org.example.DealerMonitor'
 }
+
+
+tasks.register('launchDealer', JavaExec) {
+    group = "Application"
+    description = "Launches the DealerMonitor."
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.DealerMonitor'
+    args = []
+}
+
+tasks.register('launchRouter', JavaExec) {
+    group = "Application"
+    description = "Launches the Router."
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.RouterServer'
+    args = []
+}
