@@ -23,3 +23,6 @@ delete-device:
 
 stop-device:
     ./ops/stop-device.sh
+
+up-device:
+    ./ops/up-device.sh
