@@ -36,3 +36,9 @@ tasks.register('launchRouter', JavaExec) {
     mainClass = 'org.example.RouterServer'
     args = []
 }
+
+tasks.register('printClasspath') {
+    doLast {
+        println sourceSets.main.runtimeClasspath.asPath
+    }
+}
